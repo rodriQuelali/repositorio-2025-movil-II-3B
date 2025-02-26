@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+
 import com.example.primeropasoskotlin.ui.Home
 
 class Login : AppCompatActivity() {
@@ -27,6 +28,7 @@ class Login : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //cargarHttpPosts()
         cargarR()
         estadoButon()
         //cargarVolley()
@@ -44,21 +46,17 @@ class Login : AppCompatActivity() {
         }
     }
 
-    /*fun cargarVolley(){
-        // Instantiate the RequestQueue.
+    /*fun cargarHttpPosts(){
         val queue = Volley.newRequestQueue(this)
-        val url = "https://jsonplaceholder.typicode.com/posts"
+        val url: String = "https://jsonplaceholder.typicode.com/posts"
 
-
-        val stringRequest = StringRequest(com.android.volley.Request.Method.GET, url,
-            Response.Listener<String> { response ->
-                // Display the first 500 characters of the response string.
-                print("Response is: ${response}")
+        val strintRequest = StringRequest(com.android.volley.Request.Method.GET, url,
+            Response.Listener<String>{ response ->
+               println("Los datos ${response}")
             },
-            Response.ErrorListener {print("error")})
-        queue.add(stringRequest)
+            Response.ErrorListener { println("Erro en la peticion") })
 
-
+        queue.add(strintRequest)
 
     }*/
 }
