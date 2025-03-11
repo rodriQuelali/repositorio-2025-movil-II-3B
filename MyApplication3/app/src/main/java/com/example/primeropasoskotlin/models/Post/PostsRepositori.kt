@@ -1,15 +1,31 @@
 package com.example.primeropasoskotlin.models.Post
 
+import android.app.Application
+import android.content.Context
+import android.widget.TabHost
 import com.example.primeropasoskotlin.models.Posts
 import com.example.primeropasoskotlin.models.services.ApiClient
+import com.example.primeropasoskotlin.models.services.ApiService
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
-class PostsRepositori {
+class PostsRepositori(context: Context) {
+    private val apiService:ApiService = ApiClient.instance
 
+    fun getPosts(callback: (List<Posts>?)->Unit, errorCallback: (Throwable)->Unit) {
+        apiService.getPosts().enqueue(object : Callback<List<Posts>>{
+            override fun onResponse(call: Call<List<Posts>>, response: Response<List<Posts>>) {
+                if (response.isSuccessful){
+                    callback(response.body())
+                }else{
+                    errorCallback(Exception("error: ${response.code()}"))
+                }
+            }
+            override fun onFailure(call: Call<List<Posts>>, t: Throwable) {
+                errorCallback(t)
+            }
 
-    fun getPosts(): Response<MutableList<Posts>> {
-        val response = ApiClient.instance.getPosts()
-        return  response
+        })
     }
 }

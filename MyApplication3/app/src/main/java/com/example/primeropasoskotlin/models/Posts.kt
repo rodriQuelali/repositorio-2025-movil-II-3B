@@ -1,8 +1,8 @@
 package com.example.primeropasoskotlin.models
 
 data class Posts(
-    val userId: Long,
-    val id: Long,
+    val userId: Int,
+    val id: Int,
     val title: String,
     val body: String
 )
