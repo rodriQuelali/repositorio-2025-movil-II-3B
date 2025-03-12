@@ -11,6 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class PostsRepositori(context: Context) {
+
     private val apiService:ApiService = ApiClient.instance
 
     fun getPosts(callback: (List<Posts>?)->Unit, errorCallback: (Throwable)->Unit) {
@@ -28,4 +29,22 @@ class PostsRepositori(context: Context) {
 
         })
     }
+
+    fun getGuardar(posts: Posts,callback: (List<Posts>?) -> Unit, errorCallback: (Throwable) -> Unit){
+        apiService.getGuardar(posts).enqueue(object : Callback<List<Posts>>{
+            override fun onResponse(call: Call<List<Posts>>, response: Response<List<Posts>>) {
+                if (response.isSuccessful){
+                    callback(response.body()!!)
+                }else{
+                    errorCallback(Exception("error: ${response.code()}"))
+                }
+            }
+
+            override fun onFailure(call: Call<List<Posts>>, t: Throwable) {
+                errorCallback(t)
+            }
+
+        })
+    }
+
 }

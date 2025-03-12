@@ -68,6 +68,9 @@ class Login : AppCompatActivity() {
         }
     }
 
+    //confeccionar con lisView o recicleyView para el listado de datos.
+
+
     private fun setupObservers() {
         // Observa los posts
         postViewModel.posts.observe(this) { posts ->
