@@ -14,6 +14,9 @@ class PostsDao (private val potsRepositori:PostsRepositori){
      private val _error = MutableLiveData<String>()
      val error: LiveData<String> get() = _error
 
+    private val _results = MutableLiveData<Boolean>()
+    val results :LiveData<Boolean> get() = _results
+
      fun getPosts() = potsRepositori.getPosts(
          callback = { postList ->
               _posts.value = postList
@@ -22,5 +25,14 @@ class PostsDao (private val potsRepositori:PostsRepositori){
               _error.value = throwable.message
          }
      )
+
+    fun getGuardar(posts: Posts){
+
+        potsRepositori.getGuardar(
+            posts = posts,
+            callback = {_results.value = true},
+            errorCallback = {_results.value = false}
+        )
+    }
 
 }

@@ -30,18 +30,32 @@ class PostsRepositori(context: Context) {
         })
     }
 
-    fun getGuardar(posts: Posts,callback: (List<Posts>?) -> Unit, errorCallback: (Throwable) -> Unit){
-        apiService.getGuardar(posts).enqueue(object : Callback<List<Posts>>{
-            override fun onResponse(call: Call<List<Posts>>, response: Response<List<Posts>>) {
+    fun getGuardar(posts: Posts,callback: (Posts) -> Unit, errorCallback: (Throwable) -> Unit){
+        apiService.getGuardar(posts).enqueue(object : Callback<Posts>{
+            override fun onResponse(call: Call<Posts>, response: Response<Posts>) {
                 if (response.isSuccessful){
                     callback(response.body()!!)
+                    println(response.body())
                 }else{
                     errorCallback(Exception("error: ${response.code()}"))
                 }
             }
 
-            override fun onFailure(call: Call<List<Posts>>, t: Throwable) {
+            override fun onFailure(call: Call<Posts>, t: Throwable) {
                 errorCallback(t)
+            }
+
+        })
+    }
+
+    fun editPost(id:Int ,posts: Posts,callback: (Posts) -> Unit, errorCallback: (Throwable) -> Unit){
+        apiService.patchPost(id,posts).enqueue(object : Callback<Posts>{
+            override fun onResponse(call: Call<Posts>, response: Response<Posts>) {
+
+            }
+
+            override fun onFailure(call: Call<Posts>, t: Throwable) {
+
             }
 
         })

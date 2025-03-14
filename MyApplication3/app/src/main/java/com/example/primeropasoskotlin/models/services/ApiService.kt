@@ -5,7 +5,9 @@ import com.example.primeropasoskotlin.models.Posts
 import retrofit2.http.GET
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 
 interface ApiService {
@@ -15,6 +17,9 @@ interface ApiService {
     //mas empoints
 
     @POST("posts")
-    fun getGuardar(@Body posts: Posts):Call<List<Posts>>
+    fun getGuardar(@Body posts: Posts):Call<Posts>
+
+    @PATCH("posts/{id}")
+    fun patchPost(@Path("id") id: Int, @Body posts: Posts): Call<Posts>
 
 }

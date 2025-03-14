@@ -44,15 +44,21 @@ class Login : AppCompatActivity() {
         }
 
         // Configura las observaciones
-        setupObservers()
+        //setupObservers()
 
         // Carga los posts
-        loadPosts()
+        //loadPosts()
 
         //httpRretofig()
 
         cargarR()
         estadoButon()
+
+        setObserveSave()
+
+        val guardarPost = Posts(102,1, "alan", "brito brito")
+
+        postViewModel.getGuardar(guardarPost)
 
     }
     //crear la funcion de cargar R
@@ -70,6 +76,17 @@ class Login : AppCompatActivity() {
 
     //confeccionar con lisView o recicleyView para el listado de datos.
 
+    //el Edit, guardar, list, delete, grud del empoints jsonplaceholder.
+
+    private fun setObserveSave(){
+        postViewModel.result.observe(this){ isSucess ->
+            if(isSucess){
+                Log.d("POST", "Registro Exitoso............--------")
+            }else{
+                Log.e("POST", "Error al registrar------------------")
+            }
+        }
+    }
 
     private fun setupObservers() {
         // Observa los posts

@@ -16,6 +16,8 @@ class PostViewModel (aplication:Application): AndroidViewModel(aplication){
     val posts: LiveData<List<Posts>> get() = postDao.posts
     val error: LiveData<String> get() = postDao.error
 
+    val result: LiveData<Boolean> get() = postDao.results
+
     init {
      val postsRepositori = PostsRepositori(aplication)
      postDao = PostsDao(postsRepositori)
@@ -25,6 +27,11 @@ class PostViewModel (aplication:Application): AndroidViewModel(aplication){
         //viewModelScope.launch {
             postDao.getPosts()  // Asumiendo que getPosts() maneja todo internamente
         //}
+    }
+
+    fun getGuardar(posts: Posts){
+
+        postDao.getGuardar(posts)
     }
 
 }
