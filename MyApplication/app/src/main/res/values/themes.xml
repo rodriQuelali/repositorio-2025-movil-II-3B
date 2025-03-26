@@ -22,4 +22,8 @@
     <style name="Theme.CarsProyect.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.CarsProyect.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.YourAppName" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Personalización de colores y estilos -->
+    </style>
 </resources>

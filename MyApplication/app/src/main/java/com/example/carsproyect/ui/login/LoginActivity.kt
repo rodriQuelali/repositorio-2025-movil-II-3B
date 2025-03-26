@@ -17,6 +17,8 @@ import com.example.carsproyect.MainActivity
 import com.example.carsproyect.databinding.ActivityLoginBinding
 
 import com.example.carsproyect.R
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 
 class LoginActivity : AppCompatActivity() {
 
@@ -29,9 +31,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val username = binding.username
-        val password = binding.password
-        val login = binding.login
+        val username: TextInputEditText = binding.username as TextInputEditText
+        val password: TextInputEditText = binding.password as TextInputEditText
+        val login: MaterialButton = binding.login as MaterialButton
         val loading = binding.loading
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
@@ -59,14 +61,17 @@ class LoginActivity : AppCompatActivity() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
+                Toast.makeText(this, "Entrar a HOME", Toast.LENGTH_SHORT).show()
                 val i = Intent(this, MainActivity::class.java)
                 startActivity(i)
+                //finish()
+                Toast.makeText(this, "Se Salio A Home", Toast.LENGTH_SHORT).show()
                 updateUiWithUser(loginResult.success)
             }
             setResult(Activity.RESULT_OK)
 
             //Complete and destroy login activity once successful
-            //finish()
+            finish()
         })
 
         username.afterTextChanged {
