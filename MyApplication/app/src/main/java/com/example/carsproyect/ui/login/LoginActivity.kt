@@ -25,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -64,8 +65,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Entrar a HOME", Toast.LENGTH_SHORT).show()
                 val i = Intent(this, MainActivity::class.java)
                 startActivity(i)
-                //finish()
-                Toast.makeText(this, "Se Salio A Home", Toast.LENGTH_SHORT).show()
+                finish()
                 updateUiWithUser(loginResult.success)
             }
             setResult(Activity.RESULT_OK)
