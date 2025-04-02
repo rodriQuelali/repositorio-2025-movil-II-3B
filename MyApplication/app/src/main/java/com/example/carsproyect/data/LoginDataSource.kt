@@ -1,17 +1,31 @@
 package com.example.carsproyect.data
 
+import android.content.Context
 import com.example.carsproyect.data.model.LoggedInUser
+import com.example.carsproyect.data.model.LoginRequest
+import com.example.carsproyect.model.services.ApiClient
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.IOException
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
-class LoginDataSource {
+class LoginDataSource(private val context: Context) {
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    suspend fun login(username: String, password: String): Result<LoggedInUser> {
         try {
-            // TODO: handle loggedInUser authentication
-            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
+
+            val loginRequest = LoginRequest(email= username, password = password)
+            val loginResponse = withContext(Dispatchers.IO){
+                ApiClient.instance.getLogin(loginRequest)
+            }
+
+            println("Respuesta exitosa: $loginResponse")
+
+            saveSharpreferences(loginResponse.access)
+
+            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), loginRequest.email)
             return Result.Success(fakeUser)
         } catch (e: Throwable) {
             return Result.Error(IOException("Error logging in", e))
@@ -20,5 +34,14 @@ class LoginDataSource {
 
     fun logout() {
         // TODO: revoke authentication
+    }
+
+    //token and refresh
+    fun saveSharpreferences(token: String){
+        val sharedPreferences = context.getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putString("ACCESS_TOKEN", token)
+            apply()
+        }
     }
 }

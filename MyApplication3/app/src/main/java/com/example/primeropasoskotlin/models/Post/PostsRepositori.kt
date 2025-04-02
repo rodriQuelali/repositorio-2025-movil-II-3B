@@ -31,6 +31,7 @@ class PostsRepositori(context: Context) {
     }
 
     fun getGuardar(posts: Posts,callback: (Posts) -> Unit, errorCallback: (Throwable) -> Unit){
+
         apiService.getGuardar(posts).enqueue(object : Callback<Posts>{
             override fun onResponse(call: Call<Posts>, response: Response<Posts>) {
                 if (response.isSuccessful){
