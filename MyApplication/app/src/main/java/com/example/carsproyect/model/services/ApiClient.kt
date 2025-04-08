@@ -1,19 +1,34 @@
 package com.example.carsproyect.model.services
 
+import android.content.Context
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    private val URL_BASE = "http://10.10.3.61:8000/"
+    private const val BASE_URL = "http://10.10.3.61:8000/"
 
+    // Instancia única de ApiService
+    private var apiService: ApiServices? = null
 
-    val instance: ApiServices by lazy {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(URL_BASE)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+    fun create(context: Context): ApiServices {
 
-        retrofit.create(ApiServices::class.java)
+        // Verifica si la instancia ya existe
+        if (apiService == null) {
+
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(AuthInterceptor(context)) // Agregar el interceptor
+                .build()
+
+            val retrofit = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(okHttpClient) // Usa el cliente con el interceptor
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            apiService = retrofit.create(ApiServices::class.java) // Crea la instancia
+        }
+        return apiService!! // Devuelve la instancia existente
     }
 }

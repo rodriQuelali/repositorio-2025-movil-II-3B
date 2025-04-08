@@ -18,7 +18,7 @@ class LoginDataSource(private val context: Context) {
 
             val loginRequest = LoginRequest(email= username, password = password)
             val loginResponse = withContext(Dispatchers.IO){
-                ApiClient.instance.getLogin(loginRequest)
+                ApiClient.create(context).getLogin(loginRequest)
             }
 
             println("Respuesta exitosa: $loginResponse")
