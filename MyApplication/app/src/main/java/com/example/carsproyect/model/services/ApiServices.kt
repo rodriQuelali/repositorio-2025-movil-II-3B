@@ -4,6 +4,7 @@ import android.telecom.Call
 import com.example.carsproyect.data.model.LoginRequest
 import com.example.carsproyect.data.model.LoginResponse
 import com.example.carsproyect.model.cars.Car
+import com.example.carsproyect.model.cars.CarRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -15,6 +16,9 @@ interface ApiServices {
 
     @GET("cars/")
     suspend fun getCars(): Response<List<Car>>
+
+    @POST("cars/")
+    suspend fun saveCar(@Body carRequest: CarRequest): Response<Car>
 
     @POST("auth/api/token/")
     @Headers("Content-Type:application/json")

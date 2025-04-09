@@ -1,7 +1,6 @@
 package com.example.carsproyect.model.cars
 
-data class Car (
-    val id:Int?,
+data class CarRequest (
     val make: String,
     val year: Int,
     val model:String,
