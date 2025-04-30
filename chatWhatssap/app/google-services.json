@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "514246316243",
+    "project_id": "whatsapp-3rob-rqv",
+    "storage_bucket": "whatsapp-3rob-rqv.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514246316243:android:94d995d7b234293a1ac426",
+        "android_client_info": {
+          "package_name": "com.example.chatwhatssap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-hzamHcEkFtP8zIEnm1aINbZesxTCcNg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
