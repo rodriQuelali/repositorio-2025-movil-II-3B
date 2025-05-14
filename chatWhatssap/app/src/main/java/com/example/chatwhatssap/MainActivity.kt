@@ -63,5 +63,17 @@ class MainActivity : AppCompatActivity() {
                 txtMessage.text?.clear()
             }
         }
+
+        fun optenerNumero(){
+            //optener numero
+            /*
+            *
+            *
+            *
+            *
+            *
+            *
+            * */
+        }
     }
 }

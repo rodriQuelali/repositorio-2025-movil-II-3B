@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.chatwhatssap.data.model.Message
 import com.example.chatwhatssap.data.repository.ChatRepository
 
-class ChatViewModel : ViewModel(){
+class ChatViewModel: ViewModel(){
 
     private  val repository= ChatRepository()
     private val _messages = MutableLiveData<List<Message>>()
